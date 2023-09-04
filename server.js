@@ -22,7 +22,15 @@ const __dirname = path.dirname(__filename)
 const app = express();
 
 //middelwares
-app.use(cors());
+const corsOptions = {
+  origin: 'https://agile-pig-top-hat.cyclic.app/', // Specify the allowed origin(s)
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // Specify allowed HTTP methods
+  credentials: true, // Allow cookies and authentication headers
+};
+
+app.use(cors(corsOptions));
+
+// app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use(express.static(path.join(__dirname,'./client/build')))
