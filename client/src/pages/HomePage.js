@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Radio } from "antd";
-// import { Checkbox, Radio } from "antd";
 import { Prices } from "../components/Prices";
 import { useCart } from "../context/cart";
 import axios from "axios";
@@ -14,7 +13,6 @@ const HomePage = () => {
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
-  // const [categories, setCategories] = useState([]);
   const [checked, setChecked] = useState([]);
   console.log(setChecked)
   const [radio, setRadio] = useState([]);
@@ -22,20 +20,9 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  //get all cat
-  // const getAllCategory = async () => {
-  //   try {
-  //     const { data } = await axios.get("http://localhost:3000/api/v1/category/get-category");
-  //     if (data?.success) {
-  //       setCategories(data?.category);
-  //     }
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+ 
 
   useEffect(() => {
-    // getAllCategory();
     getTotal();
     // eslint-disable-next-line
   }, []);
@@ -80,16 +67,7 @@ const HomePage = () => {
     }
   };
 
-  // filter by cat
-  // const handleFilter = (value, id) => {
-  //   let all = [...checked];
-  //   if (value) {
-  //     all.push(id);
-  //   } else {
-  //     all = all.filter((c) => c !== id);
-  //   }
-  //   setChecked(all);
-  // };
+  
   useEffect(() => {
     if (!checked.length || !radio.length) getAllProducts();
     // eslint-disable-next-line
@@ -116,7 +94,7 @@ const HomePage = () => {
     <Layout title={"All Products - Best offers "}>
       {/* banner image */}
       <img
-        src="/images/banner.png"
+        src="/images/ECOM.jpg"
         className="banner-img"
         alt="bannerimage"
         width={"100%"}
@@ -124,17 +102,7 @@ const HomePage = () => {
       {/* banner image */}
       <div className="container-fluid row mt-3 home-page">
         <div className="col-md-3 filters">
-          {/* <h4 className="text-center">Filter By Category</h4> */}
-          {/* <div className="d-flex flex-column">
-            {categories?.map((c) => (
-              <Checkbox
-                key={c._id}
-                onChange={(e) => handleFilter(e.target.checked, c._id)}
-              >
-                {c.name}
-              </Checkbox>
-            ))}
-          </div> */}
+          
           {/* price filter */}
           <h4 className="text-center mt-4">Filter By Price</h4>
           <div className="d-flex flex-column">
