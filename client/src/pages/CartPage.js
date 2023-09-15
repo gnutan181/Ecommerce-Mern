@@ -79,6 +79,8 @@ const CartPage = () => {
       setLoading(false);
     }
   };
+     
+
   return (
     <Layout>
       <div className=" cart-page">
@@ -133,17 +135,19 @@ const CartPage = () => {
               <p>Total | Checkout | Payment</p>
               <hr />
               <h4>Total : {totalPrice()} </h4>
-              {auth?.user?.address ? (
+              {auth?.user  ? (
+              // {auth?.user?.address && auth?.user?.country ? (
                 <>
                   <div className="mb-3">
                     <h4>Current Address</h4>
-                    <h5>{auth?.user?.address}</h5>
+                    <h5>{auth?.user?.address},{auth?.user?.city},{auth?.user?.state},{auth?.user?.country}</h5>
                     <button
                       className="btn btn-outline-warning"
                       onClick={() => navigate("/dashboard/user/profile")}
                     >
                       Update Address
                     </button>
+                   
                   </div>
                 </>
               ) : (
@@ -164,7 +168,7 @@ const CartPage = () => {
                         })
                       }
                     >
-                      Plase Login to checkout
+                      Please Login to checkout
                     </button>
                   )}
                 </div>

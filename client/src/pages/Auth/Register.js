@@ -9,8 +9,11 @@ const Register = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
   const [answer, setAnswer] = useState("");
+  const [country,setCountry] = useState("")
+  const [state,setState] = useState("")
+  const [city,setCity] = useState("")
+  const [address, setAddress] = useState("");
   const navigate = useNavigate();
 
   // form function
@@ -22,6 +25,9 @@ const Register = () => {
         email,
         password,
         phone,
+        country,
+        state,
+        city,
         address,
         answer,
       });
@@ -84,6 +90,39 @@ const Register = () => {
               className="form-control"
               id="exampleInputEmail1"
               placeholder="Enter Your Phone"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={country}
+              onChange={(e) => setCountry(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your Courtry"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={state}
+              onChange={(e) => setState(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your State"
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="form-control"
+              id="exampleInputEmail1"
+              placeholder="Enter Your City"
               required
             />
           </div>

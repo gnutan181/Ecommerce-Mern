@@ -6,7 +6,7 @@ import JWT from "jsonwebtoken";
 
 export const registerController = async (req, res) => {
   try {
-    const { name, email, password, phone, address, answer } = req.body;
+    const { name, email, password, phone,country,state,city, address, answer } = req.body;
     //validations
     if (!name) {
       return res.send({ error: "Name is Required" });
@@ -19,6 +19,15 @@ export const registerController = async (req, res) => {
     }
     if (!phone) {
       return res.send({ message: "Phone no is Required" });
+    }
+    if (!country) {
+      return res.send({ message: "Country is Required" });
+    }
+    if (!state) {
+      return res.send({ message: "State is Required" });
+    }
+    if (!city) {
+      return res.send({ message: "City is Required" });
     }
     if (!address) {
       return res.send({ message: "Address is Required" });
@@ -41,9 +50,12 @@ export const registerController = async (req, res) => {
     const user = await new userModel({
       name,
       email,
-      phone,
-      address,
       password: hashedPassword,
+      phone,
+      country,
+      state,
+      city,
+      address,
       answer,
     }).save();
 
@@ -100,6 +112,9 @@ export const loginController = async (req, res) => {
         name: user.name,
         email: user.email,
         phone: user.phone,
+        country: user.country,
+        state: user.state,
+        city: user.city,
         address: user.address,
         role: user.role,
       },
@@ -121,7 +136,7 @@ export const forgotPasswordController = async (req, res) => {
   try {
     const { email, answer, newPassword } = req.body;
     if (!email) {
-      res.status(400).send({ message: "Emai is required" });
+      res.status(400).send({ message: "Email is required" });
     }
     if (!answer) {
       res.status(400).send({ message: "answer is required" });
@@ -167,7 +182,7 @@ export const testController = (req, res) => {
 //update prfole
 export const updateProfileController = async (req, res) => {
   try {
-    const { name, email, password, address, phone } = req.body;
+    const { name, email, password,country,state,city, address, phone } = req.body;
     const user = await userModel.findById(req.user._id);
     //password
     if (password && password.length < 6) {
@@ -180,6 +195,9 @@ export const updateProfileController = async (req, res) => {
         name: name || user.name,
         password: hashedPassword || user.password,
         phone: phone || user.phone,
+        country: country || user.country,
+        state: state || user.state,
+        city: city || user.city,
         address: address || user.address,
       },
       { new: true }
@@ -193,7 +211,7 @@ export const updateProfileController = async (req, res) => {
     console.log(error);
     res.status(400).send({
       success: false,
-      message: "Error WHile Update profile",
+      message: "Error While Update profile",
       error,
     });
   }

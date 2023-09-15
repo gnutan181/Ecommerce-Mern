@@ -13,13 +13,18 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-
+ const [country,setCountry] = useState("")
+  const [state,setState] = useState("")
+  const [city,setCity] = useState("")
   //get user data
   useEffect(() => {
-    const { email, name, phone, address } = auth?.user;
+    const { email, name, phone,country,state,city, address } = auth?.user;
     setName(name);
     setPhone(phone);
     setEmail(email);
+    setCountry(country);
+    setState(state);
+    setCity(city);
     setAddress(address);
   }, [auth?.user]);
 
@@ -32,16 +37,21 @@ const Profile = () => {
         email,
         password,
         phone,
+        country,
+        state,
+        city,
         address,
       });
-      if (data?.errro) {
+      if (data?.error) {
         toast.error(data?.error);
       } else {
         setAuth({ ...auth, user: data?.updatedUser });
         let ls = localStorage.getItem("auth");
         ls = JSON.parse(ls);
         ls.user = data.updatedUser;
+      
         localStorage.setItem("auth", JSON.stringify(ls));
+        console.log(auth)
         toast.success("Profile Updated Successfully");
       }
     } catch (error) {
@@ -105,6 +115,36 @@ const Profile = () => {
                 <div className="mb-3">
                   <input
                     type="text"
+                    value={country}
+                    onChange={(e) => setCountry(e.target.value)}
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    placeholder="Enter Your Country"
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    type="text"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    placeholder="Enter Your State"
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    type="text"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    className="form-control"
+                    id="exampleInputEmail1"
+                    placeholder="Enter Your city"
+                  />
+                </div>
+                <div className="mb-3">
+                  <input
+                    type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     className="form-control"
@@ -116,6 +156,7 @@ const Profile = () => {
                 <button type="submit" className="btn btn-primary">
                   UPDATE
                 </button>
+                
               </form>
             </div>
           </div>

@@ -142,3 +142,14 @@
   color: white;
   padding: 20px 0px;
 }
+
+.form{
+  margin-top: 500px;
+  
+  border: 2px solid black;
+  height: 50vh;
+ display: flex;
+ flex-direction: column;
+ 
+
+}
